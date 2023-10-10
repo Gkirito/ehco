@@ -25,11 +25,15 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set output
+        id: vars
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+
       - name: Build multi-platform image
         uses: docker/build-push-action@v4
         with:
           context: .
-          tags: "gkirito/ehco:${{ github.ref }}"
+          tags: "gkirito/ehco:${{ steps.vars.outputs.tag }}"
           push: true
           file: build/Dockerfile
           platforms: linux/amd64,linux/arm64
