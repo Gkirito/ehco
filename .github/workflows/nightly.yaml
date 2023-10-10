@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          tags: "ehco1996/ehco:nightly"
+          tags: "gkirito/ehco:nightly"
           push: true
           file: build/Dockerfile
           platforms: linux/amd64,linux/arm64
